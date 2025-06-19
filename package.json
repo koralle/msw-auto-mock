@@ -1,6 +1,6 @@
 {
-  "name": "msw-auto-mock",
-  "version": "0.31.0",
+  "name": "@koralle/msw-auto-mock",
+  "version": "0.32.0",
   "description": "Generate random mock data from OpenAPI descriptions for msw.",
   "main": "dist/cli.js",
   "bin": {
@@ -13,7 +13,7 @@
     "changeset": "changeset",
     "release": "changeset publish"
   },
-  "author": "zoubingwu<zoubingwu@gmail.com>",
+  "author": "koralle<koralle@koralle-mgmg.com>",
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/anthropic": "1.2.12",
@@ -46,12 +46,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zoubingwu/msw-auto-mock.git"
+    "url": "https://github.com/koralle/msw-auto-mock.git"
   },
   "bugs": {
-    "url": "https://github.com/zoubingwu/msw-auto-mock/issues"
+    "url": "https://github.com/koralle/msw-auto-mock/issues"
   },
-  "homepage": "https://github.com/zoubingwu/msw-auto-mock",
+  "homepage": "https://github.com/koralle/msw-auto-mock",
   "files": [
     "dist"
   ],
