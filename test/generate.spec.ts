@@ -84,3 +84,48 @@ describe('generate:generateOperationCollection', () => {
     expect(arrayEntity).toMatchObject({ type: 'object' });
   });
 });
+
+describe('generate:OpenAPI 3.0.4 Support', () => {
+  it('should parse OpenAPI 3.0.4 spec successfully', async () => {
+    const apiDoc = await getV3Doc('./test/fixture/openapi-3.0.4.yaml');
+    expect(apiDoc).toBeDefined();
+    expect(apiDoc.openapi).toBe('3.0.4');
+    expect(apiDoc.info.title).toBe('OpenAPI 3.0.4 Test API');
+  });
+
+  it('should generate operations from OpenAPI 3.0.4 spec', async () => {
+    const collection = await generateCollectionFromSpec('./test/fixture/openapi-3.0.4.yaml');
+    expect(collection).toBeDefined();
+    expect(collection.length).toBeGreaterThan(0);
+    
+    // Check that operations are generated correctly
+    const getUsersOperation = collection.find(op => op.verb === 'get' && op.path === '/users');
+    expect(getUsersOperation).toBeDefined();
+    expect(getUsersOperation?.verb).toBe('get');
+    expect(getUsersOperation?.path).toBe('/users');
+  });
+
+  it('should handle 3.0.4 spec with complex schemas', async () => {
+    const collection = await generateCollectionFromSpec('./test/fixture/openapi-3.0.4.yaml');
+    const createUserOperation = collection.find(op => op.verb === 'post' && op.path === '/users');
+    
+    expect(createUserOperation).toBeDefined();
+    expect(createUserOperation?.verb).toBe('post');
+    
+    // Check response schemas are resolved
+    const successResponse = createUserOperation?.response?.find(r => r.code === '201')?.responses?.['application/json'];
+    expect(successResponse).toBeDefined();
+    expect(successResponse?.properties?.id).toBeDefined();
+    expect(successResponse?.properties?.email).toBeDefined();
+  });
+
+  it('should handle path parameters in 3.0.4 spec', async () => {
+    const collection = await generateCollectionFromSpec('./test/fixture/openapi-3.0.4.yaml');
+    const getUserOperation = collection.find(op => op.verb === 'get' && op.path === '/users/:userId');
+    
+    expect(getUserOperation).toBeDefined();
+    expect(getUserOperation?.path).toBe('/users/:userId');
+    expect(getUserOperation?.response).toBeDefined();
+    expect(getUserOperation?.response.length).toBeGreaterThan(0);
+  });
+});
