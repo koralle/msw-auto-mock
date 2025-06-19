@@ -1,5 +1,5 @@
 {
-  "name": "msw-auto-mock",
+  "name": "@koralle/msw-auto-mock",
   "version": "0.31.0",
   "description": "Generate random mock data from OpenAPI descriptions for msw.",
   "main": "dist/cli.js",
@@ -13,7 +13,7 @@
     "changeset": "changeset",
     "release": "changeset publish"
   },
-  "author": "zoubingwu<zoubingwu@gmail.com>",
+  "author": "koralle<koralle@koralle-mgmg.com>",
   "license": "MIT",
   "dependencies": {
     "@ai-sdk/anthropic": "1.2.12",
